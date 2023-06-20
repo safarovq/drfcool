@@ -1,8 +1,8 @@
 from django.db import models
-from common.models import BaseModel
+from common.models import BaseModel, TimeUpdate
 
 
-class Boys(BaseModel):
+class Boys(BaseModel, TimeUpdate):
     category = models.ForeignKey('boys.category', on_delete=models.CASCADE)
 
     class Meta:
