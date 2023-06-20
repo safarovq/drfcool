@@ -32,7 +32,8 @@ THIRD_PARTY_APPS = [
 ]
 
 CUSTOM_APPS = [
-    'women.apps.WomenConfig',
+    'boys.apps.BoysConfig',
+    'common.apps.CommonConfig',
 ]
 
 INSTALLED_APPS = [
