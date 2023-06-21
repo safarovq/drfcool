@@ -23,10 +23,35 @@ class BoysAPIView(APIView):
     def post(self, request):
         serializer = BoysSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        new_post = Boys.objects.create(
-            name=request.data['name'],
-            description=request.data['description'],
-            category_id=request.data['category_id'],
-        )
+        serializer.save()
 
-        return Response({'new_post': BoysSerializer(new_post).data})
+        return Response({'new_post': serializer.data})
+
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({'error': 'no method put'})
+
+        try:
+            instance = Boys.objects.get(pk=pk)
+        except:
+            return Response({'error': 'object does not exist'})
+
+        serializer = BoysSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'post': serializer.data})
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({'error': 'no method delete'})
+
+        try:
+            instance = Boys.objects.get(pk=pk)
+        except:
+            return Response({'error': 'object does not exist'})
+
+        instance.delete()
+
+        return Response({'message': 'deleted'})

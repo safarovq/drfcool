@@ -16,6 +16,19 @@ class BoysModel:
 class BoysSerializer(serializers.Serializer):
     name = serializers.CharField()
     description = serializers.CharField()
+    category_id = serializers.CharField()
+
+    def create(self, validated_data):
+        return Boys.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.description = validated_data.get('description', instance.description)
+        instance.category_id = validated_data.get('category_id', instance.category_id)
+
+        instance.save()
+        return instance
+
 
 
 def encode():
