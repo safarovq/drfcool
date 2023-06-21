@@ -10,4 +10,5 @@ class BoysAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'name',)
+    list_display_links = ('name',)

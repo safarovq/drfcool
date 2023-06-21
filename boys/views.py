@@ -15,15 +15,18 @@ from rest_framework.response import Response
 
 class BoysAPIView(APIView):
     def get(self, request):
-        lst = Boys.objects.all().values()
+        # lst = Boys.objects.all().values()
+        b = Boys.objects.all()
 
-        return Response({'name': list(lst)})
+        return Response({'name': BoysSerializer(b, many=True).data})
 
     def post(self, request):
+        serializer = BoysSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         new_post = Boys.objects.create(
             name=request.data['name'],
             description=request.data['description'],
             category_id=request.data['category_id'],
         )
 
-        return Response({'new_post': model_to_dict(new_post)})
+        return Response({'new_post': BoysSerializer(new_post).data})
