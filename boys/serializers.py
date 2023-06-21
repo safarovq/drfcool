@@ -13,21 +13,21 @@ class BoysModel:
         self.description = description
 
 
-class BoysSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    description = serializers.CharField()
-    category_id = serializers.CharField()
-
-    def create(self, validated_data):
-        return Boys.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.description = validated_data.get('description', instance.description)
-        instance.category_id = validated_data.get('category_id', instance.category_id)
-
-        instance.save()
-        return instance
+# class BoysSerializer(serializers.Serializer):
+#     name = serializers.CharField()
+#     description = serializers.CharField()
+#     category_id = serializers.CharField()
+#
+#     def create(self, validated_data):
+#         return Boys.objects.create(**validated_data)
+#
+#     def update(self, instance, validated_data):
+#         instance.name = validated_data.get('name', instance.name)
+#         instance.description = validated_data.get('description', instance.description)
+#         instance.category_id = validated_data.get('category_id', instance.category_id)
+#
+#         instance.save()
+#         return instance
 
 
 
@@ -48,7 +48,8 @@ def decode():
     serializer.is_valid()
     print(serializer.validated_data)
 
-# class BoysSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Boys
-#         fields = ('name', 'descriptions',)
+
+class BoysSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Boys
+        fields = ('name', 'description', 'category')
