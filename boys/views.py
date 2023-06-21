@@ -1,3 +1,4 @@
+from django.forms import model_to_dict
 from django.shortcuts import render
 from rest_framework import generics
 from boys.models import Boys
@@ -21,8 +22,8 @@ class BoysAPIView(APIView):
     def post(self, request):
         new_post = Boys.objects.create(
             name=request.data['name'],
-            descriptions=request.data['descriptions'],
+            description=request.data['description'],
             category_id=request.data['category_id'],
         )
 
-        return Response({'new_post': new_post})
+        return Response({'new_post': model_to_dict(new_post)})
