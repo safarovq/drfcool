@@ -12,7 +12,17 @@ from rest_framework.response import Response
 #     queryset = Boys.objects.all()
 #     serializer_class = BoysSerializer
 
-class BoysAPIView(generics.ListCreateAPIView):
+class BoysListAPIView(generics.ListCreateAPIView):
+    queryset = Boys.objects.all()
+    serializer_class = BoysSerializer
+
+
+class BoysUpdateAPIView(generics.UpdateAPIView):
+    queryset = Boys.objects.all()
+    serializer_class = BoysSerializer
+
+
+class BoysCRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Boys.objects.all()
     serializer_class = BoysSerializer
 
