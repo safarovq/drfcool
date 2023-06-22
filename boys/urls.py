@@ -2,8 +2,10 @@ from django.urls import path, include
 from . import views
 from rest_framework import routers
 
-router = routers.SimpleRouter()
-router.register(r'boys', views.BoysViewSet)
+# router = routers.SimpleRouter()
+router = routers.DefaultRouter()
+router.register(r'boys', views.BoysViewSet, basename="boys")
+print(router.urls)
 
 urlpatterns = [
     # path('boys/', views.BoysViewSet.as_view({'get': 'list'}), name='boys'),
