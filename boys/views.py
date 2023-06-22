@@ -1,6 +1,6 @@
 from django.forms import model_to_dict
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from boys.models import Boys
 from .serializers import BoysSerializer
 from rest_framework.views import APIView
@@ -12,19 +12,24 @@ from rest_framework.response import Response
 #     queryset = Boys.objects.all()
 #     serializer_class = BoysSerializer
 
-class BoysListAPIView(generics.ListCreateAPIView):
+class BoysViewSet(viewsets.ModelViewSet):
     queryset = Boys.objects.all()
     serializer_class = BoysSerializer
 
-
-class BoysUpdateAPIView(generics.UpdateAPIView):
-    queryset = Boys.objects.all()
-    serializer_class = BoysSerializer
-
-
-class BoysCRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Boys.objects.all()
-    serializer_class = BoysSerializer
+#
+# class BoysListAPIView(generics.ListCreateAPIView):
+#     queryset = Boys.objects.all()
+#     serializer_class = BoysSerializer
+#
+#
+# class BoysUpdateAPIView(generics.UpdateAPIView):
+#     queryset = Boys.objects.all()
+#     serializer_class = BoysSerializer
+#
+#
+# class BoysCRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Boys.objects.all()
+#     serializer_class = BoysSerializer
 
 # class BoysAPIView(APIView):
 #     def get(self, request):
